@@ -13,35 +13,41 @@ in the Debian archive.
 
 1. Create a stretch chroot with cowbuilder
 
-# cowbuilder create --distribution stretch --mirror http://debian/debian
+    $ cowbuilder create --distribution stretch --mirror http://debian/debian
 
 2. Login in the chroot
 
-# cowbuilder login
+    $ cowbuilder login
 
-3. Install all the packaged needed to build grafana: build dependencies and
+3. Install all the packages needed to build grafana: build dependencies and
 extra packages:
 
-# apt-get update
-# apt-get install -y --force-yes debhelper libfontconfig1-dev golang-1.7 golang nodejs git dh-systemd
-# apt-get install -y --force-yes ca-certificates wget
+    $ apt-get update
+
+    $ apt-get install -y --force-yes debhelper libfontconfig1-dev golang-1.7 golang nodejs git dh-systemd
+
+    $ apt-get install -y --force-yes ca-certificates wget
 
 4. Now is where the ugly modifications come:
 
-# ln -s /usr/bin/nodejs /usr/bin/node
-# wget https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_0.19.1_all.deb
-# dpkg -i yarn_0.19.1_all.deb
+    $ ln -s /usr/bin/nodejs /usr/bin/node
+
+    $ wget https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_0.19.1_all.deb
+
+    $ dpkg -i yarn_0.19.1_all.deb
 
 5. Get Grafana and get the 4.1.1 tag
 
-# git clone https://github.com/grafana/grafana.git
-# cd grafana
-# git checkout v4.1.1 -b debian-4.1.1
+    $ git clone https://github.com/grafana/grafana.git
+
+    $ cd grafana
+
+    $ git checkout v4.1.1 -b debian-4.1.1
 
 6. Finally, clone this repository, copy the debian/ directory inside your grafana clone
 and run from within grafana/
 
-# dpkg-buildpackage -b
+    $ dpkg-buildpackage -b
 
 Your package will be ready in a few minutes if you are lucky and your Internet link isn't
 very slow!

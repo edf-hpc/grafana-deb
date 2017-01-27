@@ -1,0 +1,5 @@
+/etc/grafana
+/usr/sbin
+/usr/share/grafana
+/var/lib/grafana
+/var/log/grafana

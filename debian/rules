@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+export GOPATH := $(CURDIR)/go
+export REPO_PATH := $(GOPATH)/src/github.com/grafana/grafana
+
+%:
+	dh $@ --with systemd
+
+override_dh_auto_build:
+	mkdir -p go/src/github.com/grafana
+	ln -s $(CURDIR) go/src/github.com/grafana/grafana
+	cd $(REPO_PATH) && go run build.go build
+
+	yarn install
+	./node_modules/.bin/grunt release
+
+# Avoid running the tests from upstream's Makefile
+override_dh_auto_test:
+
+override_dh_auto_install:
+	cp -p $(REPO_PATH)/tmp/bin/grafana-server debian/grafana/usr/sbin/grafana-server
+	cp -p $(REPO_PATH)/tmp/bin/grafana-cli debian/grafana/usr/sbin/grafana-cli
+	cp -a $(REPO_PATH)/tmp/. debian/grafana/usr/share/grafana
+	rm -rf debian/grafana/usr/share/grafana/bin
+	cp conf/sample.ini debian/grafana/etc/grafana/grafana.ini
+	cp conf/ldap.toml debian/grafana/etc/grafana/ldap.toml
+	dh_auto_install

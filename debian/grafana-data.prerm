@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+## Directory <=> symlink update
+## remove symlinks and empty directories:
+D="/usr/share/grafana/public/vendor"
+if [ -d "$D" ]; then
+    find "$D" -xdev -type l -delete
+    find "$D" -xdev -type d -empty -delete
+    ## -printf 'removed %p\n'
+fi
+
+#DEBHELPER#

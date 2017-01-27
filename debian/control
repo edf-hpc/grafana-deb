@@ -1,0 +1,21 @@
+Source: grafana
+Section: web
+Priority: optional
+Maintainer: Ana Guerrero Lopez <ana-externe.guerrero@edf.fr>
+Build-Depends: debhelper (>= 9),
+               dh-systemd,
+               git,
+               golang,
+               golang-1.7,
+               libfontconfig1-dev,
+               nodejs
+Standards-Version: 3.9.7
+Homepage: http://grafana.org
+
+Package: grafana
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Built-Using: ${misc:Built-Using}
+Description: feature rich metrics dashboard and graph editor
+ Grafana is a feature rich metrics dashboard and graph editor for Graphite,
+ InfluxDB & OpenTSDB.

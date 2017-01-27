@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        if ! getent passwd grafana > /dev/null 2>&1 ; then
+            adduser --quiet --system --group --disabled-login --no-create-home --home /var/lib/grafana grafana
+        fi
+        chown -R grafana:grafana /var/log/grafana /var/lib/grafana
+        chmod 755 /var/log/grafana /var/lib/grafana
+
+        ## configuration files should not be modifiable by grafana user, as this can be a security issue.
+        chmod 755 /etc/grafana
+        chown -h root:grafana /etc/grafana/grafana.ini /etc/grafana/ldap.toml
+        chmod    u=rw,g=r,o=- /etc/grafana/grafana.ini /etc/grafana/ldap.toml
+    ;;
+esac
+
+#DEBHELPER#

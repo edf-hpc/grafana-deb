@@ -11,18 +11,18 @@ doesn't follow Debian guidelines and it's unsuitable for its inclusion
 in the Debian archive.
 
 
-1. Create a stretch chroot with cowbuilder
+Create a stretch chroot with cowbuilder
 
 ```
 $ cowbuilder create --distribution stretch --mirror http://debian/debian
 ```
 
-2. Login in the chroot
+Login in the chroot
 ```
 $ cowbuilder login
 ```
 
-3. Install all the packages needed to build grafana: build dependencies and
+Install all the packages needed to build grafana: build dependencies and
 extra packages:
 ```
 $ apt-get update
@@ -30,21 +30,21 @@ $ apt-get install -y --force-yes debhelper libfontconfig1-dev golang-1.7 golang 
 $ apt-get install -y --force-yes ca-certificates wget
 ```
 
-4. Now is where the ugly modifications come:
+Now is where the ugly modifications come:
 ```
 $ ln -s /usr/bin/nodejs /usr/bin/node
 $ wget https://dl.yarnpkg.com/debian/pool/main/y/yarn/yarn_0.19.1_all.deb
 $ dpkg -i yarn_0.19.1_all.deb
 ```
 
-5. Get Grafana and get the 4.1.1 tag:
+Get Grafana and get the 4.1.1 tag:
 ```
 $ git clone https://github.com/grafana/grafana.git
 $ cd grafana
 $ git checkout v4.1.1 -b debian-4.1.1
 ```
 
-6. Finally, clone this repository, copy the debian/ directory inside your grafana clone
+Finally, clone this repository, copy the debian/ directory inside your grafana clone
 and run from within grafana/
 ```
 $ dpkg-buildpackage -b

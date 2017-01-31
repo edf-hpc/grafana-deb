@@ -14,7 +14,6 @@ Homepage: http://grafana.org
 Package: grafana
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Built-Using: ${misc:Built-Using}
 Description: feature rich metrics dashboard and graph editor
  Grafana is a feature rich metrics dashboard and graph editor for Graphite,
  InfluxDB & OpenTSDB.

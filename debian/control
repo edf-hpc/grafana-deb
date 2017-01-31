@@ -5,8 +5,7 @@ Maintainer: Ana Guerrero Lopez <ana-externe.guerrero@edf.fr>
 Build-Depends: debhelper (>= 9),
                dh-systemd,
                git,
-               golang,
-               golang-1.7,
+               golang (>= 2:1.7~),
                libfontconfig1-dev,
                nodejs
 Standards-Version: 3.9.7

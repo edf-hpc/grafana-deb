@@ -26,8 +26,7 @@ Install all the packages needed to build grafana: build dependencies and
 extra packages:
 ```
 $ apt-get update
-$ apt-get install -y --force-yes debhelper libfontconfig1-dev golang-1.7 golang nodejs git dh-systemd
-$ apt-get install -y --force-yes ca-certificates wget
+$ apt-get install -y debhelper libfontconfig1-dev golang nodejs git dh-systemd ca-certificates wget
 ```
 
 Now is where the ugly modifications come:
